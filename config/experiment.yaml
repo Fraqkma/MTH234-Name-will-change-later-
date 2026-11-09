@@ -1,0 +1,10 @@
+# Phase 0 proposal from task.md. Freeze or revise before the first official evaluation.
+status: provisional
+seed: 42
+noise_std: 0.2
+sample_counts:
+  train: 24
+  validation: 24
+  test: 120
+signal: "sin(2*pi*x)"
+x_range: [0.0, 1.0]

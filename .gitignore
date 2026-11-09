@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.playwright-mcp/
+
+# Generated artifacts and local settings
+artifacts/figures/*
+artifacts/metrics/*
+!.gitkeep
+.env
+.DS_Store
+Thumbs.db

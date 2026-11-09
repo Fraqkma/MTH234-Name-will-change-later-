@@ -1,0 +1,23 @@
+{
+  "seed": 42,
+  "noise_std": 0.0,
+  "sample_counts": {"train": 2, "validation": 1, "test": 1},
+  "expected_shapes": {"train": 2, "validation": 1, "test": 1},
+  "sample": {
+    "train": {
+      "x": [0.9167441575549085, 0.9109866676343232],
+      "y": [-0.499578281979807, -0.5305821921921129],
+      "sample_ids": ["train-0000", "train-0001"]
+    },
+    "validation": {
+      "x": [0.4674907799518424],
+      "y": [0.20284402263832513],
+      "sample_ids": ["validation-0000"]
+    },
+    "test": {
+      "x": [0.07123920291270869],
+      "y": [0.43281142571886366],
+      "sample_ids": ["test-0000"]
+    }
+  }
+}
