@@ -1,0 +1,9 @@
+{
+  "approved_by": "Nipitpon",
+  "approved_at_utc": "2026-11-19T17:08:26.894259+00:00",
+  "manifest_sha256": "89e262472c1da4c64bee15d8bc4710e16fee33d37ab3895974b673a418f06562",
+  "base_commit": "bda781cc1dae8bd0493de3f3979e351a05cd6bd7",
+  "verified_files": 61,
+  "mismatches": [],
+  "scope": "approved pre-scoring snapshot"
+}

@@ -22,6 +22,24 @@ def make_A(x: NDArray[np.float64], degree: int) -> FloatArray:
     return np.vander(values, N=degree + 1, increasing=True)
 
 
+def make_bike_design(hours: NDArray[np.int64], working_days: NDArray[np.int64]) -> FloatArray:
+    """One intercept, hour-0 reference coding, working-day main effect, and interaction."""
+    hour_values = np.asarray(hours)
+    working_values = np.asarray(working_days)
+    if (hour_values.ndim != 1 or working_values.shape != hour_values.shape
+            or hour_values.size == 0):
+        raise ValueError("hours and working_days must be non-empty matching vectors")
+    if (not np.issubdtype(hour_values.dtype, np.integer)
+            or not np.issubdtype(working_values.dtype, np.integer)
+            or np.any((hour_values < 0) | (hour_values > 23))
+            or np.any((working_values != 0) & (working_values != 1))):
+        raise ValueError("hours must be 0..23 and working_days must be 0 or 1")
+    hour_effects = (hour_values[:, None] == np.arange(1, 24)).astype(float)
+    work = working_values.astype(float)[:, None]
+    return np.column_stack((np.ones(hour_values.size), hour_effects, work,
+                            hour_effects * work))
+
+
 @dataclass(frozen=True)
 class PolynomialScaler:
     """Standardize non-intercept columns using statistics from training data."""

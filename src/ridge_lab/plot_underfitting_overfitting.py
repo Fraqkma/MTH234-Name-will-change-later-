@@ -26,7 +26,6 @@ training data.
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.pipeline import Pipeline
@@ -75,9 +74,5 @@ for i in range(len(degrees)):
     plt.xlim((0, 1))
     plt.ylim((-2, 2))
     plt.legend(loc="best")
-    plt.title(
-        "Degree {}\nMSE = {:.2e}(+/- {:.2e})".format(
-            degrees[i], -scores.mean(), scores.std()
-        )
-    )
+    plt.title(f"Degree {degrees[i]}\nMSE = {-scores.mean():.2e}(+/- {scores.std():.2e})")
 plt.show()

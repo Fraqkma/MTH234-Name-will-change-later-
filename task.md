@@ -1,18 +1,20 @@
-# task.md — Overfitting & Ridge Regression: Interactive Linear Algebra Lab
+> Current owner decision (2026-11-19): Nipitpon is the sole human reviewer. This supersedes project-managed requests below for separate Sitthawee, Sirapobe, or independent reviewer sign-offs. G0 acknowledgments remain unrecorded unless actually supplied. Protocol freeze and official holdout evaluation remain pending Nipitpon's consolidated final review.
 
-> **Status:** Phase 0 local scaffold exists / Frontend architecture migrated to HTML-CSS-JS + FastAPI / Named ownership acknowledgments and method sign-off pending  
-> **Updated:** 2026-11-09 (Asia/Bangkok)  
+# task.md — The Least Squares Showdown
+
+> **Status:** Phase 0 scaffold and Battle A bike development path exist / Frontend uses HTML-CSS-JS + FastAPI / Official holdout, named ownership acknowledgments, and method sign-off pending
+> **Updated:** 2026-11-18 (Asia/Bangkok)
 > **Course:** Linear Algebra group project (6 members)  
 > **Final submission:** **2026-12-01** — report (any format) + **10-minute video; six members speak equally**  
 > **Source of truth:** the group's supplied README and Thai/English plans, supplemented by the corrections explicitly marked below.  
 > **Confirmed language:** **English** for report, website, slides, narration, code, UI labels, comments, and documentation. Internal team chat may use Thai.
-> **Repository decision:** Create a **new, separate repository** named `ridge-regression-lab` (proposed slug); no remote URL, GitHub owner, or visibility has been provided.
+> **Repository decision:** Continue in this existing repository; no remote URL, GitHub owner, or visibility has been provided.
 > **Leadership confirmed:** **Nipitpon Choojit — Project Manager**; **Sirapobe Parinyarat (Sirapob) — Technical Advisor / Research Guide**. Both have hands-on implementation responsibilities.
 > **Other role assignments:** Working proposal from the six-person roster, to be acknowledged by members at kickoff; not independently confirmed by each member.
 
 ## 0. Mission and submission contract
 
-**Working title:** *When Perfect Fit Fails: Visualizing Overfitting and Ridge Regression with Least Squares*
+**Confirmed title:** *The Least Squares Showdown*
 
 **Research question:** Does the model with the smallest training error generalize best to new data, and how does L2 regularization change this trade-off?
 
@@ -26,7 +28,7 @@ Build a **locally runnable, interactive web demonstration** of polynomial regres
 - [ ] Final slides + **one 10:00-minute video**; six speakers approximately **1:40 each**, none omitted.
 - [ ] Clear README setup and demonstration instructions; successful clean-machine installation/demo.
 
-**Non-goals:** building a production ML platform, neural networks, external/purchased datasets, public deployment before the local app passes checks, pretending ridge always wins, or inventing results. **Use free/existing tooling.**
+**Non-goals:** building a production ML platform, neural networks, paid datasets, public deployment before the local app passes checks, pretending Ridge always wins, or inventing results. **Use free/existing tooling.**
 
 ## 1. Corrections to the original group plan (decisions)
 
@@ -108,7 +110,7 @@ D. **Generalization check:** once A and B are fixed using validation only, repor
 - [ ] Condition-number diagnostic with a clear numerical-precision warning.
 - [ ] Final held-out results table (MSE + RMSE; no fabricated performance claims).
 - [ ] **Interactive controls:** polynomial degree and lambda; reset-to-default; consistent state when switching pages.
-- [ ] **Targeted 3D teaching view (after core graphs):** a genuinely two-parameter loss surface of a simple linear model, with OLS and Ridge minima. A high-degree polynomial has more than two parameters: label any 3D depiction of it as a **two-parameter slice** rather than "the full loss surface." No need for a gradient-descent animation unless time remains.
+- [ ] **Battle B's main demonstration:** a genuinely two-parameter 3D loss surface of a simple linear model, with OLS and Ridge minima. A high-degree polynomial has more than two parameters: label any 3D depiction of it as a **two-parameter slice** rather than "the full loss surface." No need for a gradient-descent animation unless time remains.
 - [ ] Every figure has title, axes, units/metric definitions, legends, dataset split labels, and an actual/illustrative marker.
 
 **Predefined guardrail:** If the default synthetic dataset does not show visually strong overfitting, document the observed outcome first. Any *additional* exploratory demonstration scenario must be versioned and described as exploratory, never silently swapped in after viewing sealed test results.
@@ -149,16 +151,33 @@ D. **Generalization check:** once A and B are fixed using validation only, repor
 
 | Window | Speaker | Focus |
 |---|---|---|
-| 00:00–01:40 | P1 — Nassasi | Problem, Least Squares geometric intuition |
+| 00:00–01:40 | P1 — Nassasi | Open with “Can we predict how many bikes will be rented in a given hour?”; Least Squares intuition |
 | 01:40–03:20 | P2 — Thanatorn | Normal equations, one small numeric/QR illustration |
-| 03:20–05:00 | P3 — Parama | Data, polynomial features, degrees, model setup |
-| 05:00–06:40 | P4 — Sitthawee | Live overfit curves and train/validation errors |
-| 06:40–08:20 | P5 — Sirapobe | Ridge regularization, lambda, before-and-after demo |
-| 08:20–10:00 | P6 — Nipitpon | Held-out evaluation, ML link, limitations, final takeaway |
+| 03:20–05:00 | P3 — Parama | Bike hour × working-day design in plain English; separate synthetic degree study |
+| 05:00–06:40 | P4 — Sitthawee | Bike chronological validation and synthetic overfitting curves |
+| 06:40–08:20 | P5 — Sirapobe | Ridge/Lasso comparison and Battle B 3D loss surface |
+| 08:20–10:00 | P6 — Nipitpon | RMSE ranking, supporting metrics, held-out evaluation after freeze, limitations |
 
 Each member records their own ~100-second segment or participates in one synchronized recording; reserve transitions *inside* their allocated segment rather than adding an extra narrator.
 
 ## 5. Implementation phases and checkpoints
+
+### Battle A — Audit and select one real-world dataset
+
+**Decision owner:** Nipitpon, with the team if needed. **Status:** Capital Bike Sharing and the chronological evaluation are confirmed; official holdout scoring awaits protocol freeze. The real-world OLS/Ridge/Lasso comparison is a separate Battle A evaluation. The controlled synthetic degree/ten-seed experiment remains separate.
+
+- [x] Compare three public regression datasets using original publisher records and locally inspected raw files. Record source, CC BY 4.0 terms, target and units, schema, row counts, missingness, duplicates, repeated settings or dates, leakage risks, and feasible polynomial complexity in [the audit](docs/datasets_review.md).
+- [x] Recommend one dataset and a fallback using data quality, split validity, licensing, and workload. Keep candidate selection independent of model scores.
+- [x] **Project owner:** select UCI Capital Bike Sharing `hour.csv` for its clear hourly rental question. Accept the more demanding chronological split and narrower fixed interaction model rather than the audit's simpler Airfoil recommendation. This choice was made on presentation and question fit, not candidate model scores; preserve the audit's original recommendation as history.
+- [x] Use `cnt` (rentals/hour) as the target and a single-intercept design with categorical `hr`, binary `workingday`, both main effects, and their interaction. Exclude weather, `casual`, `registered`, IDs, and all other variables from predictors. The target components reconstruct `cnt` exactly.
+- [x] Reserve the last 146 of 731 distinct dates as one fixed, sealed future holdout. Use five expanding-window development folds on the preceding 585 dates; keep each date intact. Record exact dates and row counts in [the split contract](docs/bike_split_contract.md).
+- [x] Implement the loader, source checksum, stable date-hour row IDs, shared features/folds, and tests. Development-only OLS/Ridge/Lasso smoke metrics are documented separately from official holdout results.
+- [ ] **P3 → Sitthawee and Sirapobe:** complete the [protocol-freeze review checklist](docs/bike_split_contract.md#protocol-freeze-review--pending) and record dated technical sign-offs. Arrange the separate independent PR review; Sirapobe cannot self-approve Ridge code. Any preprocessing learned later must be fit within each training window. Agree on the final refit and reporting protocol before holdout scoring.
+- [ ] Freeze feature, preprocessing, model selection, and evaluation protocol before the single official holdout scoring stage. Do not use holdout outcomes to choose the dataset, split, degree, lambda, or Lasso penalty.
+
+**Battle A ranking:** primary mean validation RMSE in rentals/hour; show MAE, R², and RMSE variation across the five future windows beside it. User-adjusted tier weights may produce an explicitly exploratory ranking; do not substitute that ranking for the fixed primary result. **Battle B solver ranking remains separate.** Polynomial degree selection and the ten-seed sensitivity study belong to the synthetic experiment; bike validation is chronological and unseeded.
+
+**Freeze status:** pending Sitthawee and Sirapobe sign-off, independent code review, and G0 role/interface acknowledgments. The research decisions and bike split contract resolve the ten-seed scope; the historical dataset audit's earlier airfoil-repeat proposal is superseded. No official bike holdout scoring is authorized by this review packet.
 
 ### Phase 0 — Initialization, contracts, and feasibility (Nov 9–11)
 - [x] Local scaffold prepared for review: `pyproject.toml`, `.gitignore`, CI, package skeleton, FastAPI service and browser UI; original group README preserved. Named ownership/acknowledgment is still pending, and no remote GitHub repo was created.
@@ -265,7 +284,9 @@ Design nuances: immutable results are preferred; function arguments explicit; in
 
 **Confirmed by the requester:**
 - **Deliverable language:** English for the website, report, presentation/slides, 10-minute spoken video and project docs/code.
-- **Repository:** a brand-new project/repository; use proposed local folder `ridge-regression-lab`.
+- **Repository:** continue in the existing The Least Squares Showdown repository.
+- **Battle A:** UCI Capital Bike Sharing `hour.csv`, `cnt` target, hour × working-day main effects and interaction, chronological validation, RMSE primary with MAE/R²/window variation beside it.
+- **Presentation:** open with the hourly bike-rental prediction question; keep Battle B's 3D loss surface as its main demonstration.
 - **Leadership:** Nipitpon Choojit is Project Manager; Sirapobe Parinyarat (Sirapob) is Technical Advisor/Research Guide. **Both remain active implementers and speakers.**
 
 **Still pending; use safe non-blocking defaults:**
@@ -283,3 +304,9 @@ Design nuances: immutable results are preferred; function arguments explicit; in
 ---
 
 **Academic source:** Textbook Sections 6.5 and 6.6 as provided by the course, plus the team's original README and bilingual group plans. Cite relevant textbook sections and any externally consulted references in the final report.
+
+A1 approved by Nipitpon: approval supplied in the current conversation for the preceding working-tree final-refit fix. No unique committed revision exists for that fix; historical base is bda781cc1dae8bd0493de3f3979e351a05cd6bd7.
+
+## Consolidated owner handoff (2026-11-19)
+
+A1 approved by Nipitpon. Sole human review is now Nipitpon; prior project-managed separate sign-off requests are superseded. Development table/API and masked reserved targets are implemented. New reproducible studies, Run All, and full two-parameter surface are available. See BATTLE_A_PROTOCOL_REVIEW.md for measured checks and report/draft.md for actual results. Synthetic convergence limitations and provisional configuration require final review. G0 acknowledgments remain open; official Bike Sharing holdout stays sealed. No PDF/video/submission is claimed.

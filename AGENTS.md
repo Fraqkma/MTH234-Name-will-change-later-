@@ -1,12 +1,14 @@
+> Current owner decision (2026-11-19): Nipitpon is the sole human reviewer. This supersedes project-managed requests below for separate Sitthawee, Sirapobe, or independent reviewer sign-offs. G0 acknowledgments remain unrecorded unless actually supplied. Protocol freeze and official holdout evaluation remain pending Nipitpon's consolidated final review.
+
 # AGENTS.md — Instructions for Codex and Collaborating Coding Agents
 
 ## Project mission
 
-Build a reproducible, six-member **Linear Algebra** educational project demonstrating **Least Squares -> polynomial overfitting -> Ridge Regression -> validation and generalization**. Main deliverables: modular Python package, interactive vanilla HTML/CSS/JavaScript website served by FastAPI, mathematically faithful report, and 10-minute video with six approximately equal speakers. Deadline: **2026-12-01 (Asia/Bangkok)**.
+Build **The Least Squares Showdown**, a reproducible, six-member **Linear Algebra** educational project demonstrating **Least Squares -> polynomial overfitting -> Ridge Regression -> validation and generalization**. Main deliverables: modular Python package, interactive vanilla HTML/CSS/JavaScript website served by FastAPI, mathematically faithful report, and 10-minute video with six approximately equal speakers. Deadline: **2026-12-01 (Asia/Bangkok)**.
 
 **Read `task.md` before changing code.** Treat it as the roadmap and acceptance criteria. The uploaded group README and Thai/English PDF plans define the original educational scope; `task.md` explicitly identifies corrections needed for scientific validity. Do not silently discard either. **Confirmed: all report, website, slides, video narration, README and project artifacts must be in English. Internal team conversation may be in Thai.**
 
-**Repository setup:** the user selected a **new repository**. Start with local folder/repo `ridge-regression-lab` if it is not already initialized. Do not create a public/private GitHub remote, select an owner/visibility, invite collaborators, or push without authorization. Do not accidentally edit a different existing project.
+**Repository setup:** Continue in this existing The Least Squares Showdown repository. Do not create another local repository or a public/private GitHub remote, select an owner/visibility, invite collaborators, or push without authorization. Do not accidentally edit a different existing project.
 
 ## Operating rules
 

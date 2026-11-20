@@ -1,4 +1,5 @@
 import { fetchDemo } from "./api.js";
+import { initBikeExploratoryRanking } from "./bike-rank.js?v=final2";
 import { renderCoefficientChart } from "./charts/coefficients.js";
 import { renderFitChart } from "./charts/fits.js";
 import { getDemoState } from "./state.js";
@@ -123,4 +124,5 @@ if ("IntersectionObserver" in window) {
 }
 
 updateControlLabels();
+initBikeExploratoryRanking();
 refresh();
